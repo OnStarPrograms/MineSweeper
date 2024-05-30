@@ -52,7 +52,7 @@ class Toolbox{
         };
 
         //Stupid sfml deleting my render windows
-        sf::RenderWindow window = sf::RenderWindow(sf::VideoMode(800, 600), "P4 - Minesweeper, Aiden Thomas");
+        sf::RenderWindow *window = new sf::RenderWindow(sf::VideoMode(800, 600), "P4 - Minesweeper, Aiden Thomas");
 
         bool **BombMap;
         int width;

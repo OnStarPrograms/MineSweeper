@@ -24,37 +24,37 @@ class Tile
             case FLAGGED:
                 base = sf::Sprite(toolbox._tile_hidden);
                 base.move(Position);
-                toolbox.window.draw(base);
+                toolbox.window->draw(base);
 
                 Top = sf::Sprite(toolbox._flag);
                 Top.move(Position);
-                toolbox.window.draw(Top);
+                toolbox.window->draw(Top);
                 break;
             case REVEALED:
                 base = sf::Sprite(toolbox._tile_revealed);
                 base.move(Position);
-                toolbox.window.draw(base);
+                toolbox.window->draw(base);
 
                 if (count != 0)
                 {
                     Top = sf::Sprite(toolbox._nums[count-1]);
                     Top.move(Position);
-                    toolbox.window.draw(Top);
+                    toolbox.window->draw(Top);
                 }
                 break;
             case EXPLODED:
                 base = sf::Sprite(toolbox._tile_revealed);
                 base.move(Position);
-                toolbox.window.draw(base);
+                toolbox.window->draw(base);
 
                 Top = sf::Sprite(toolbox._mine);
                 Top.move(Position);
-                toolbox.window.draw(Top);
+                toolbox.window->draw(Top);
                 break;
             default:
                 base = sf::Sprite(toolbox._tile_hidden);
                 base.move(Position);
-                toolbox.window.draw(base);
+                toolbox.window->draw(base);
             }
             if (toolbox.debugging == true)
             {
@@ -62,11 +62,11 @@ class Tile
                 {
                     base = sf::Sprite(toolbox._tile_revealed);
                     base.move(Position);
-                    toolbox.window.draw(base);
+                    toolbox.window->draw(base);
 
                     Top = sf::Sprite(toolbox._mine);
                     Top.move(Position);
-                    toolbox.window.draw(Top);
+                    toolbox.window->draw(Top);
                 }
             }
         };

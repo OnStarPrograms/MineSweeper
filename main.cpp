@@ -90,7 +90,7 @@ bool getDebugMode()
 void render()
 {
     Toolbox &toolbox = Toolbox::getInstance();
-    //toolbox.window.draw(Buttons)
+    //toolbox.window->draw(Buttons)
     int counter = 0;
     int secCounter = 0;
     for (int i = 1; i < 17; i++)
@@ -113,26 +113,26 @@ void render()
     {
         toolbox.gameState->setPlayStatus(toolbox.gameState->WIN);
     }
-    toolbox.window.draw(*toolbox.debugBut->getSprite());
-    toolbox.window.draw(*toolbox.newGameButton->getSprite());
-    toolbox.window.draw(*toolbox.testButton1->getSprite());
-    toolbox.window.draw(*toolbox.testButton2->getSprite());
+    toolbox.window->draw(*toolbox.debugBut->getSprite());
+    toolbox.window->draw(*toolbox.newGameButton->getSprite());
+    toolbox.window->draw(*toolbox.testButton1->getSprite());
+    toolbox.window->draw(*toolbox.testButton2->getSprite());
 
     if (toolbox.gameState->getMineCount() - toolbox.flags < 0)
     {
-    toolbox.window.draw(toolbox.Digits[10]);
+    toolbox.window->draw(toolbox.Digits[10]);
     }
     else
     {
-    toolbox.window.draw(toolbox.Digits[std::abs(int((toolbox.gameState->getMineCount() - toolbox.flags)/100)%10)]);
+    toolbox.window->draw(toolbox.Digits[std::abs(int((toolbox.gameState->getMineCount() - toolbox.flags)/100)%10)]);
     }
     sf::Sprite firss = toolbox.Digits[std::abs(int((toolbox.gameState->getMineCount() - toolbox.flags)/10)%10)];
     firss.move(sf::Vector2f(21, 0));
-    toolbox.window.draw(firss);
+    toolbox.window->draw(firss);
 
     sf::Sprite seconds = toolbox.Digits[std::abs(int(toolbox.gameState->getMineCount() - toolbox.flags)%10)];
     seconds.move(sf::Vector2f(42, 0));
-    toolbox.window.draw(seconds);
+    toolbox.window->draw(seconds);
 };
 
 int gameloop()
@@ -141,13 +141,13 @@ int gameloop()
     sf::Mouse mouse;
 
 
-    toolbox.window.isOpen();
-    toolbox.window.setFramerateLimit(60);
+    toolbox.window->isOpen();
+    toolbox.window->setFramerateLimit(60);
 
-    while (toolbox.window.isOpen())
+    while (toolbox.window->isOpen())
     {
         //Mouse Tracking 
-        sf::Vector2i mousevec = mouse.getPosition(toolbox.window);
+        sf::Vector2i mousevec = mouse.getPosition(*toolbox.window);
         if (toolbox.gameState->getPlayStatus() == toolbox.gameState->LOSS)
         {
             toolbox.newGameButton->setSprite(new sf::Sprite(toolbox._face_lose));
@@ -161,12 +161,12 @@ int gameloop()
         // Event processing
         // if ()
         sf::Event event;
-        while (toolbox.window.pollEvent(event))
+        while (toolbox.window->pollEvent(event))
         {
             
             // Request for closing the window
             if (event.type == sf::Event::Closed)
-                toolbox.window.close();
+                toolbox.window->close();
                 // // Requested mouse button is a left click and run all the actions
                 if ((event.type == sf::Event::MouseButtonPressed) && (event.mouseButton.button == sf::Mouse::Button::Left))
                 {
@@ -204,15 +204,15 @@ int gameloop()
             }
         }
         // Clear the whole window before rendering a new frame
-        toolbox.window.clear();
+        toolbox.window->clear();
         
         // Draw some graphical entities
-        // window.draw(sprite);
-        // toolbox.window.draw(sf::RectangleShape());
+        // window->draw(sprite);
+        // toolbox.window->draw(sf::RectangleShape());
         render();
 
         // End the current frame and display its contents on screen
-        toolbox.window.display();
+        toolbox.window->display();
     }
     return 0;
 }
